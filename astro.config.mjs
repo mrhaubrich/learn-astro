@@ -68,7 +68,13 @@ export default defineConfig({
     astrowind({
       config: './src/config.yaml',
     }),
-    sentry(),
+    sentry({
+      dsn: 'https://ba271e2c3fca0799cac00094d5644048@o4506401384955904.ingest.us.sentry.io/4507154762825728',
+      sourceMapsUploadOptions: {
+        project: 'learn-astro',
+        authToken: process.env.SENTRY_AUTH_TOKEN,
+      },
+    }),
     spotlightjs(),
   ],
   image: {
