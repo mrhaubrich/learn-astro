@@ -1,32 +1,29 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-import { defineConfig, squooshImageService } from 'astro/config';
-
-import sitemap from '@astrojs/sitemap';
-import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
-import icon from 'astro-icon';
+import sitemap from '@astrojs/sitemap';
+import tailwind from '@astrojs/tailwind';
+import vercel from '@astrojs/vercel/serverless';
 import compress from '@playform/compress';
-
-import astrowind from './vendor/integration';
-
+import sentry from '@sentry/astro';
+import spotlightjs from '@spotlightjs/astro';
+import icon from 'astro-icon';
+import { defineConfig, squooshImageService } from 'astro/config';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import {
+  lazyImagesRehypePlugin,
   readingTimeRemarkPlugin,
   responsiveTablesRehypePlugin,
-  lazyImagesRehypePlugin,
 } from './src/utils/frontmatter.mjs';
-
+import astrowind from './vendor/integration';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
 const hasExternalScripts = false;
 const whenExternalScripts = (items = []) =>
   hasExternalScripts ? (Array.isArray(items) ? items.map((item) => item()) : [items()]) : [];
 
+// https://astro.build/config
 export default defineConfig({
-  output: 'static',
-
+  output: 'server',
   integrations: [
     tailwind({
       applyBaseStyles: false,
@@ -49,13 +46,13 @@ export default defineConfig({
         ],
       },
     }),
-
     ...whenExternalScripts(() =>
       partytown({
-        config: { forward: ['dataLayer.push'] },
+        config: {
+          forward: ['dataLayer.push'],
+        },
       })
     ),
-
     compress({
       CSS: true,
       HTML: {
@@ -68,22 +65,20 @@ export default defineConfig({
       SVG: false,
       Logger: 1,
     }),
-
     astrowind({
       config: './src/config.yaml',
     }),
+    sentry(),
+    spotlightjs(),
   ],
-
   image: {
     service: squooshImageService(),
     domains: ['cdn.pixabay.com'],
   },
-
   markdown: {
     remarkPlugins: [readingTimeRemarkPlugin],
     rehypePlugins: [responsiveTablesRehypePlugin, lazyImagesRehypePlugin],
   },
-
   vite: {
     resolve: {
       alias: {
@@ -91,4 +86,5 @@ export default defineConfig({
       },
     },
   },
+  adapter: vercel(),
 });
