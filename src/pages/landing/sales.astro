@@ -1,8 +1,9 @@
 ---
 import Layout from '~/layouts/LandingLayout.astro';
 
-import Hero2 from '~/components/widgets/Hero2.astro';
+import Button from '~/components/ui/Button.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
 
 const metadata = {
   title: 'Sales Landing Page Demo',
@@ -12,7 +13,7 @@ const metadata = {
 <Layout metadata={metadata}>
   <!-- Hero2 Widget ******************* -->
   <!-- your-page.astro -->
-  <button onclick="throw new Error('This is a test error')"> Throw test error </button>
+  <Button type="button" onclick="throw new Error('This is a test error')"> Throw test error </Button>
   <Hero2
     tagline="Long-form Sales Demo"
     title="Long-form Sales: Sell with a Story: The Long-form Way!"
