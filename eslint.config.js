@@ -1,12 +1,14 @@
+import js from '@eslint/js';
+import typescriptParser from '@typescript-eslint/parser';
 import astroEslintParser from 'astro-eslint-parser';
+import eslintConfigPrettier from 'eslint-config-prettier';
 import eslintPluginAstro from 'eslint-plugin-astro';
 import globals from 'globals';
-import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
-import typescriptParser from '@typescript-eslint/parser';
 
 export default [
   js.configs.recommended,
+  eslintConfigPrettier,
   ...eslintPluginAstro.configs['flat/recommended'],
   ...tseslint.configs.recommended,
   {
