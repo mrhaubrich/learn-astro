@@ -114,7 +114,7 @@ export const applyGetPermalinks = (menu: Record<string, any> = {}): Record<strin
     return menu.map((item) => applyGetPermalinks(item));
   } else if (typeof menu === 'object' && menu !== null) {
     const obj: Record<string, any> = {};
-    for (let key in menu) {
+    for (const key in menu) {
       if (key === 'href') {
         if (typeof menu[key] === 'string') {
           obj[key] = getPermalink(menu[key]);

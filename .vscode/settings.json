@@ -9,17 +9,18 @@
     "typescript",
     "typescriptreact"
   ],
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "eslint.experimental.useFlatConfig": true,
+  // "eslint.options": {
+  //   "overrideConfigFile": "./eslint.config.cjs"
+  // },
   "files.associations": {
     "*.mdx": "markdown"
   },
-  "eslint.nodePath": "/home/marhaubrich/.nvm/versions/node/v20.12.2/bin/node",
   "prettier.documentSelectors": [
     "**/*.astro"
   ],
   "[astro]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
-  "yaml.schemas": {
-    "./.vscode/astrowind/config-schema.json": "/src/config.yaml"
-  }
 }
