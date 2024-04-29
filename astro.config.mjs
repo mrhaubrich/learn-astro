@@ -5,7 +5,6 @@ import tailwind from '@astrojs/tailwind';
 import vercel from '@astrojs/vercel/serverless';
 import compress from '@playform/compress';
 import sentry from '@sentry/astro';
-import spotlightjs from '@spotlightjs/astro';
 import icon from 'astro-icon';
 import { defineConfig, squooshImageService } from 'astro/config';
 import path from 'path';
@@ -70,12 +69,12 @@ export default defineConfig({
     }),
     sentry({
       dsn: 'https://ba271e2c3fca0799cac00094d5644048@o4506401384955904.ingest.us.sentry.io/4507154762825728',
+      enabled: process.env.NODE_ENV === 'production',
       sourceMapsUploadOptions: {
         project: 'learn-astro',
         authToken: process.env.SENTRY_AUTH_TOKEN,
       },
     }),
-    spotlightjs(),
   ],
   image: {
     service: squooshImageService(),

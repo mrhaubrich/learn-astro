@@ -1,7 +1,6 @@
 ---
 import Layout from '~/layouts/LandingLayout.astro';
 
-import Button from '~/components/ui/Button.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 
@@ -13,7 +12,12 @@ const metadata = {
 <Layout metadata={metadata}>
   <!-- Hero2 Widget ******************* -->
   <!-- your-page.astro -->
-  <Button type="button" onclick="throw new Error('This is a test error')"> Throw test error </Button>
+  <!-- throw test error -->
+  <button
+    id="throw-test-error"
+    class="z-50 fixed bottom-4 right-4 p-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+    onclick="throw new Error('Test Error')">Throw Test Error</button
+  >
   <Hero2
     tagline="Long-form Sales Demo"
     title="Long-form Sales: Sell with a Story: The Long-form Way!"
