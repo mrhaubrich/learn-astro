@@ -109,17 +109,26 @@ interface MenuItem {
   url?: string;
 }
 
-export const applyGetPermalinks = (menu: Record<string, any> = {}): Record<string, any> => {
+interface MenuItem {
+  type?: string;
+  url?: string;
+}
+
+interface MenuObject {
+  [key: string]: string | MenuItem | MenuObject | MenuObject[];
+}
+
+export const applyGetPermalinks = (menu: MenuObject = {}): MenuObject | MenuObject[] => {
   if (Array.isArray(menu)) {
-    return menu.map((item) => applyGetPermalinks(item));
+    return menu.map((item) => applyGetPermalinks(item)) as MenuObject[];
   } else if (typeof menu === 'object' && menu !== null) {
-    const obj: Record<string, any> = {};
+    const obj: MenuObject = {};
     for (const key in menu) {
       if (key === 'href') {
         if (typeof menu[key] === 'string') {
-          obj[key] = getPermalink(menu[key]);
+          obj[key] = getPermalink(menu[key] as string);
         } else if (typeof menu[key] === 'object') {
-          const menuItem: MenuItem = menu[key];
+          const menuItem: MenuItem = menu[key] as MenuItem;
           if (menuItem.type === 'home') {
             obj[key] = getHomePermalink();
           } else if (menuItem.type === 'blog') {
@@ -131,7 +140,7 @@ export const applyGetPermalinks = (menu: Record<string, any> = {}): Record<strin
           }
         }
       } else {
-        obj[key] = applyGetPermalinks(menu[key]);
+        obj[key] = applyGetPermalinks(menu[key] as MenuObject);
       }
     }
     return obj;
