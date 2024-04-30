@@ -6,14 +6,6 @@ import ToggleTheme from '~/components/common/ToggleTheme.astro';
 
 import { getAsset, getHomePermalink, trimSlash } from '~/utils/permalinks';
 
-interface Link {
-  text?: string;
-  href?: string;
-  ariaLabel?: string;
-  icon?: string;
-  target?: string;
-}
-
 export interface Props {
   id?: string;
   isSticky?: boolean;

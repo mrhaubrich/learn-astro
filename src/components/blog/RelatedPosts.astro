@@ -1,10 +1,10 @@
 ---
 import { APP_BLOG } from 'astrowind:config';
 
-import { fetchPosts, getRelatedPosts } from '~/utils/blog';
-import BlogHighlightedPosts from '../widgets/BlogHighlightedPosts.astro';
 import type { Post } from '~/types';
+import { getRelatedPosts } from '~/utils/blog';
 import { getBlogPermalink } from '~/utils/permalinks';
+import BlogHighlightedPosts from '../widgets/BlogHighlightedPosts.astro';
 
 export interface Props {
   post: Post;
