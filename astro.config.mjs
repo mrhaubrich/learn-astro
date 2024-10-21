@@ -6,7 +6,7 @@ import vercel from '@astrojs/vercel/serverless';
 import compress from '@playform/compress';
 import sentry from '@sentry/astro';
 import icon from 'astro-icon';
-import { defineConfig, squooshImageService } from 'astro/config';
+import { defineConfig, sharpImageService } from 'astro/config';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import {
@@ -79,7 +79,7 @@ export default defineConfig({
     }),
   ],
   image: {
-    service: squooshImageService(),
+    service: sharpImageService(),
     domains: ['cdn.pixabay.com'],
   },
   markdown: {
